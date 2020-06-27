@@ -3,10 +3,11 @@
 
 # This implementation is a pure python solution without any optimization.
 # It can be used as a baseline for comparison with other implementations.
+
 # The allowed moves for each position are a tuple consisting of the
 # position being jumped over and the position being jumped to. The
 # from position is the index in the array.
-allowedMoves = (
+ALLOWED_MOVES = (
     ((1, 3), (2, 5)),  # 0
     ((3, 6), (4, 8)),  # 1
     ((4, 7), (5, 9)),  # 2
@@ -25,7 +26,7 @@ allowedMoves = (
 )
 
 # Histogram of # remaining pegs at the end of each game
-remainingCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+remaining_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 def validate(moves):
@@ -34,8 +35,8 @@ def validate(moves):
 
     # Create the starting board by finding the 'to' element of the first move
     # and setting that position to blank
-    emptySpot = moves[0][2]
-    board = [emptySpot != x for x in range(15)]
+    empty_spot = moves[0][2]
+    board = [empty_spot != x for x in range(15)]
 
     # For each move in the game, verify that it is legal and then apply it to the board
     for pos, over, to in moves:
@@ -48,7 +49,7 @@ def validate(moves):
 
     # Check every position to see that no more valid moves exist
     for pos in range(15):
-        for over, to in allowedMoves[pos]:
+        for over, to in ALLOWED_MOVES[pos]:
             if board[pos] and board[over]:
                 assert board[to]
 
@@ -59,9 +60,9 @@ def move(board, moves, pos, over, to):
     board[over] = False
     board[to] = True
     moves.append([pos, over, to])
-    gameOver = play(board, moves)  # Keep playing with the updated board
-    if gameOver:  # that's the end of this game
-        remainingCount[14 - len(moves)] += 1
+    game_over = play(board, moves)  # Keep playing with the updated board
+    if game_over:  # that's the end of this game
+        remaining_count[14 - len(moves)] += 1
         # print('Final:', (14 - len(moves), moves))
         validate(moves)
 
@@ -69,31 +70,36 @@ def move(board, moves, pos, over, to):
 def play(board, moves):
     """Start from the existing board, walk through all available moves."""
     # This is recursive and doesn't unwind until no more valid moves remain.
-    gameOver = True
+    game_over = True
     for pos, _ in enumerate(board):  # for every spot on the board
         if board[pos]:  # if it has a peg
-            for over, to in allowedMoves[
+            for over, to in ALLOWED_MOVES[
                 pos
             ]:  # loop over all allowed moves from that position
                 if board[over] and not board[to]:  # If a move is open
                     move(board.copy(), moves.copy(), pos, over, to)
-                    gameOver = False
+                    game_over = False
 
-    return gameOver
+    return game_over
 
 
-if __name__ == "__main__":
-    uniqueStartingPositions = [
+def main():
+    """Entry point."""
+    unique_starting_positions = [
         0,
-        # 1,
-        # 3,
-        # 4,
+        1,
+        3,
+        4,
     ]  # all other positions are rotations or mirrors of these
-    for pos in uniqueStartingPositions:
+    for pos in unique_starting_positions:
         board = [pos != x for x in range(15)]
         moves = []
         play(board, moves)
 
     # Print the histogram
-    for idx, val in enumerate(remainingCount):
+    for idx, val in enumerate(remaining_count):
         print(idx, val)
+
+
+if __name__ == "__main__":
+    main()
