@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Generate all solutions to the peg game - 15 holes & 14 pegs
-   This implementation is a pure python solution without any optimization.
-   It can be used as a baseline for comparison with other implementations.
-"""
+"""Generate all solutions to the peg game - 15 holes & 14 pegs."""
+
+# This implementation is a pure python solution without any optimization.
+# It can be used as a baseline for comparison with other implementations.
 # The allowed moves for each position are a tuple consisting of the
-# position being jumped over and the position being jumpted to. The
+# position being jumped over and the position being jumped to. The
 # from position is the index in the array.
 allowedMoves = (
     ((1, 3), (2, 5)),  # 0
@@ -29,7 +29,7 @@ remainingCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 def validate(moves):
-    """Given a set of moves, make sure they are all legal and end with no more possible moves"""
+    """Given a set of moves, make sure they are all legal and end with no more possible moves."""
     assert len(moves) > 0
 
     # Create the starting board by finding the 'to' element of the first move
@@ -54,7 +54,7 @@ def validate(moves):
 
 
 def move(board, moves, pos, over, to):
-    """Record a move and then kick off the remainder of the game"""
+    """Record a move and then kick off the remainder of the game."""
     board[pos] = False
     board[over] = False
     board[to] = True
@@ -67,10 +67,10 @@ def move(board, moves, pos, over, to):
 
 
 def play(board, moves):
-    """Starting from the existing board, walk through all available moves. 
-       This is recursive and doesn't unwind until no more valid moves remain."""
+    """Start from the existing board, walk through all available moves."""
+    # This is recursive and doesn't unwind until no more valid moves remain.
     gameOver = True
-    for pos in range(len(board)):  # for every spot on the board
+    for pos, _ in enumerate(board):  # for every spot on the board
         if board[pos]:  # if it has a peg
             for over, to in allowedMoves[
                 pos
@@ -85,9 +85,9 @@ def play(board, moves):
 if __name__ == "__main__":
     uniqueStartingPositions = [
         0,
-        1,
-        3,
-        4,
+        # 1,
+        # 3,
+        # 4,
     ]  # all other positions are rotations or mirrors of these
     for pos in uniqueStartingPositions:
         board = [pos != x for x in range(15)]
