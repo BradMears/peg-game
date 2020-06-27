@@ -26,7 +26,22 @@ ALLOWED_MOVES = (
 )
 
 # Histogram of # remaining pegs at the end of each game
-remaining_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+remaining_count = [  # pylint: disable-msg=C0103
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+]
 
 
 def validate(moves):
