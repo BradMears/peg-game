@@ -50,7 +50,7 @@ std::ostream &operator<<(std::ostream &os, const moves_t &moves)
 std::array<size_t, 14> remainingCount;
 
 // The allowed moves for each position are a tuple consisting of the
-// position being jumped over and the position being jumpted to. The
+// position being jumped over and the position being jumped to. The
 // from position is the index in the array.
 typedef std::array<boardIndex_t, 2> over_to_t;
 std::array<std::vector<over_to_t>, 15> allowedMoves;
