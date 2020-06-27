@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "peg-game", "peg-game.vcxproj", "{201C12F9-81C8-4BE5-A05C-AA615B0CCEB6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "peg_game", "peg_game.vcxproj", "{201C12F9-81C8-4BE5-A05C-AA615B0CCEB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
