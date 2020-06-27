@@ -32,6 +32,7 @@ remaining_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 def validate(moves):
     """Given a set of moves, make sure they are all legal and end with no more possible moves."""
     assert len(moves) > 0
+    assert len(moves) < 14
 
     # Create the starting board by finding the 'to' element of the first move
     # and setting that position to blank
